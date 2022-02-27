@@ -17,7 +17,7 @@
   become: yes
   become_user: isucon
   when:
-    go_version_output is failed or (go_version_output.stdout != "go version go1.12.9 linux/{{ architecture }}" and go_version_output.stdout != "go version go1.13 linux/{{ architecture }}")
+    go_version_output is failed or (go_version_output.stdout != "go version go1.12.9 linux/" ~ architecture|string and go_version_output.stdout != "go version go1.13 linux/" ~ architecture|string)
   args:
     chdir: /home/isucon
   command: |
