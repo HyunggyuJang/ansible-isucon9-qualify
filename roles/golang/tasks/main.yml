@@ -17,11 +17,11 @@
   become: yes
   become_user: isucon
   when:
-    go_version_output is failed or (go_version_output.stdout != "go version go1.12.9 linux/amd64" and go_version_output.stdout != "go version go1.13 linux/amd64")
+    go_version_output is failed or (go_version_output.stdout != "go version go1.12.9 linux/{{ architecture }}" and go_version_output.stdout != "go version go1.13 linux/{{ architecture }}")
   args:
     chdir: /home/isucon
   command: |
-    /home/isucon/xbuild/go-install "{{ golang_version | default('1.12.9') }}" /home/isucon/local/go
+    /home/isucon/xbuild/go-install "{{ golang_version | default('1.12.9') }}" /home/isucon/local/go linux "{{ architecture }}"
 
 - name: Add PATH for Go
   become: yes
